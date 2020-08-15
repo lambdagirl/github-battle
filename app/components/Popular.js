@@ -43,64 +43,31 @@ function popularReducer(state, action){
     throw new Error(`That action type isn't supported.`);
   }
 }
+
 export default function Popular(){
   const [selectedLanguage,setSelectedLanguage] = React.useState("All")
   const [state,dispatch] = React.useReducer(popularReducer, {error: null})
-}
-export default class Popular extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      selectedLanguage: "All",
-      repos: null,
-      error: null,
-    };
-
-    this.updateLanguage = this.updateLanguage.bind(this);
-    this.isLoading = this.isLoading.bind(this);
-  }
-  componentDidMount() {
-    this.updateLanguage(this.state.selectedLanguage);
-  }
-  updateLanguage(selectedLanguage) {
-    this.setState({
-      selectedLanguage,
-      error: null,
-      repos: null,
-    });
-
+  React.useEffect(()=>{
     fetchPopularRepos(selectedLanguage)
-      .then((repos) =>
-        this.setState({
-          repos,
-          error: null,
-        })
-      )
-      .catch(() => {
-        console.warn("Error fetching repos: ", error);
+      .then((repos)=> dispatch({type: 'success', selectedLanguage, repos}))
+      .catch((error)=> dispatch({type: 'error',error}))
+  },[selectedLanguage])
 
-        this.setState({
-          error: `There was an error fetching the repositories.`,
-        });
-      });
-  }
-  isLoading() {
-    return this.state.repos === null && this.state.error === null;
-  }
-  render() {
-    const { selectedLanguage, repos, error } = this.state;
+  const isLoading = () => !state[selectedLanguage] && state.error === null
 
-    return (
-      <React.Fragment>
-        <LanguagesNav
-          selected={selectedLanguage}
-          onUpdateLanguage={this.updateLanguage}
-        />
-        {this.isLoading() && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        {repos && <pre>{JSON.stringify(repos, null, 2)}</pre>}
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <LanguagesNav
+        selected={selectedLanguage}
+        onUpdateLanguage={setSelectedLanguage}
+      />
+      {isLoading() && <p>Loading...</p>}
+      {state.error && <p>{state.error}</p>}
+      {state[selectedLanguage] && (
+        <pre>{JSON.stringify(state[selectedLanguage],null,2)}</pre>
+      )}
+    </React.Fragment>
+  );
 }
+
