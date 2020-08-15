@@ -27,6 +27,26 @@ LanguagesNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired,
 };
 
+function popularReducer(state, action){
+  if (action.type === 'success'){
+    return {
+      ...state,
+      error:null,
+      [action.selectedLanguage] : action.repos
+    }
+  }else if (action.type === 'error'){
+      return {
+        ...state,
+        error: action.error.message
+      }
+  } else{
+    throw new Error(`That action type isn't supported.`);
+  }
+}
+export default function Popular(){
+  const [selectedLanguage,setSelectedLanguage] = React.useState("All")
+  const [state,dispatch] = React.useReducer(popularReducer, {error: null})
+}
 export default class Popular extends React.Component {
   constructor(props) {
     super(props);
