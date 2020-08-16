@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUserFriends, FaFighterJet, FaTrophy } from "react-icons/fa";
+import { FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle } from "react-icons/fa";
 
 
 function Instructions(){
@@ -52,7 +52,27 @@ function PlayerInput({onSubmit, label}){
                 </button>
             </div>
         </form>
-        
+    )
+}
+
+function PlayerPreview({username, onReset, label}){
+    return (
+        <div className='column player'>
+            <h3 className='player-label'>{label}</h3>
+            <div className='row'>
+                <img 
+                    className='avatar-small'
+                    src={`https://github.com/${username}.png?size=200`}
+                    alt={`Avatar for ${username}`}
+                />
+                <a href={`http://github.com/${username}`}
+                    className='link'
+                > {username} </a>
+            </div>
+            <button onClick={onReset}>
+                <FaTimesCircle size={26} />
+            </button>
+        </div>
     )
 }
 export default function Battle(){
@@ -61,27 +81,42 @@ export default function Battle(){
     const handleSubmit = (id, player) => id === 'playerOne'
     ? setPlayerOne(player)
     : setPlayerTwo(player)
+
+  
+     const handleReset = (id) =>
+       id === "playerOne" ? setPlayerOne(null) : setPlayerTwo(null);
 return (
   <>
     <Instructions />
     <div className="players-container">
       <h1 className="center-text header-lg"> Players</h1>
       <div className="row">
-        {playerOne === null && (
+        {playerOne === null ? (
           <PlayerInput
-            label="Player 1"
+            label="Player One"
             onSubmit={(player) => handleSubmit("playerOne", player)}
           />
-        )}
-        {playerTwo === null && (
-          <PlayerInput
-            label="Player 2"
-            onSubmit={(player) => handleSubmit("playerTwo", player)}
+        ) : (
+          <PlayerPreview
+            username={playerOne}
+            label="Player One"
+            onReset={() => handleReset("playerOne")}
           />
         )}
-
-        
+        {playerTwo === null ? (
+          <PlayerInput
+            label="Player Two"
+            onSubmit={(player) => handleSubmit("playerTwo", player)}
+          />
+        ) : (
+          <PlayerPreview
+            username={playerTwo}
+            label="Player Two"
+            onReset={() => handleReset("playerTwo")}
+          />
+        )}
       </div>
+      
     </div>
   </>
 );
