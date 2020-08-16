@@ -1,9 +1,57 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { fetchPopularRepos } from "../utils/api";
+import { FaUser, FaStar, FaCodeBranch, FaExclamationTriangle  } from 'react-icons/fa';
+
+function RepoGrid({repos}){
+  return (
+    <ul>
+      { repos.map((repo,index)=>{
+        const {
+          name,
+          owner,
+          html_url,
+          stargazers_count,
+          forks,
+          open_issues,
+        } = repo;
+        const { login, avatar_url } = owner;
+
+        return (
+          <li key={html_url}>
+            <h4>#{index}</h4>
+            <img src={avatar_url} alt={`avatar for ${login}`} />
+            <h2>
+              <a href={html_url}>{name}</a>
+            </h2>
+            <ul className="card-list">
+              <li>
+                <FaUser />
+                <a href={`https://github.com/${login}`}>{login}</a>
+              </li>
+              <li>
+                <FaStar />
+                {stargazers_count.toLocaleString()} stars
+              </li>
+              <li>
+                <FaCodeBranch />
+                {forks.toLocaleString()} stars
+              </li>
+              <li>
+                <FaExclamationTriangle />
+                {open_issues.toLocaleString()} open issues
+              </li>
+            </ul>
+          </li>
+        );
+      })
+      }
+    </ul>
+  )
+};
 
 function LanguagesNav({ selected, onUpdateLanguage }) {
-  const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
+  const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python", "Go"];
 
   return (
     <ul className="flex-center">
@@ -72,9 +120,7 @@ export default function Popular(){
       />
       {isLoading() && <p>Loading...</p>}
       {state.error && <p>{state.error}</p>}
-      {state[selectedLanguage] && (
-        <pre>{JSON.stringify(state[selectedLanguage],null,2)}</pre>
-      )}
+      {state[selectedLanguage] && <RepoGrid repos={state[selectedLanguage]} />}
     </React.Fragment>
   );
 }
