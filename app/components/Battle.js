@@ -2,9 +2,9 @@ import React from 'react';
 import { FaUserFriends, FaFighterJet, FaTrophy } from "react-icons/fa";
 
 
-export default function Battle(){
+function Instructions(){
     return (
-      <div className="battle-container">
+      <div className="instructions-container">
         <h1 className="header-lg center-text">Battle</h1>
         <ol className="container-sm grid center-text battle-instructions">
           <li>
@@ -22,4 +22,12 @@ export default function Battle(){
         </ol>
       </div>
     );
+}
+
+export default function Battle(){
+    return (
+    <>
+    <Instructions />
+    </>
+    )
 }
