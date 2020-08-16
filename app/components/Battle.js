@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle } from "react-icons/fa";
-
+import Results from './Results';
 
 function Instructions(){
     return (
@@ -25,8 +25,7 @@ function Instructions(){
 }
 
 function PlayerInput({onSubmit, label}){
-      const [username, setUsername] = React.useState('')
-
+    const [username, setUsername] = React.useState('')
     const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -84,6 +83,14 @@ function PlayerPreview({username, onReset, label}){
 export default function Battle(){
     const [playerOne,setPlayerOne] = useState(null)
     const [playerTwo, setPlayerTwo] = useState(null)
+    const [battle, setBattle] = useState(false)
+
+    if (battle === true){
+        return <Results playerOne = {playerOne} playerTwo = {playerTwo} />
+    }
+
+
+
     const handleSubmit = (id, player) => id === 'playerOne'
     ? setPlayerOne(player)
     : setPlayerTwo(player)
@@ -122,7 +129,13 @@ return (
           />
         )}
       </div>
-      
+      {playerOne && playerTwo &&(
+          <button className='btn dark-btn btn-space'
+            onClick={()=>setBattle(true)}
+            >
+            Battle
+          </button>)
+      }
     </div>
   </>
 );
