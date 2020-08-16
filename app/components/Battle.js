@@ -35,8 +35,8 @@ function PlayerInput({onSubmit, label}){
 
   const handleChange = (event) => setUsername(event.target.value)
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="username" className="player-label">{label.username}
+        <form onSubmit={handleSubmit} className="column player">
+            <label htmlFor="username" className="player-label">{label}
             </label>
             <div className="row player-input">
                 <input 
@@ -62,17 +62,27 @@ export default function Battle(){
     ? setPlayerOne(player)
     : setPlayerTwo(player)
 return (
-      <>
-        <Instructions />
-        <div className="players-container">
-          <h1 className="text-center "> Players</h1>
-          <div className="row space-around">
-            <PlayerInput
-              label="player one"
-              onSubmit={(player) => handleSubmit("playerOne", player)}
-            />
-          </div>
-        </div>
-      </>
-    );
+  <>
+    <Instructions />
+    <div className="players-container">
+      <h1 className="center-text header-lg"> Players</h1>
+      <div className="row">
+        {playerOne === null && (
+          <PlayerInput
+            label="Player 1"
+            onSubmit={(player) => handleSubmit("playerOne", player)}
+          />
+        )}
+        {playerTwo === null && (
+          <PlayerInput
+            label="Player 2"
+            onSubmit={(player) => handleSubmit("playerTwo", player)}
+          />
+        )}
+
+        
+      </div>
+    </div>
+  </>
+);
 }

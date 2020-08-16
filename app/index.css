@@ -26,9 +26,31 @@ li {
     align-items: center;
 }
 
+.btn {
+  padding: 10px;
+  letter-spacing: .25em;
+  border-radius: 3px;
+  border: none;
+  font-size: 16px;
+  align-items: center;
+  cursor: pointer;
+  max-width: 200px;
+}
+
 .btn-clear {
     border: none;
     background-color: transparent;
+}
+
+.btn-dark{
+      color: #e6e6e6;
+  background: #141414;
+}
+
+
+.btn-dark:disabled {
+  background: #f2f2f2;
+  color: #c7c7c7;
 }
 .nav-link{
     font-size: 18px;
@@ -121,4 +143,51 @@ li {
 
 .battle-instructions svg{
     padding: 40px;
+}
+
+.players-container {
+    margin:  100px 0;
+}
+
+.players-container {
+  margin: 100px 0;
+}
+
+.player-label {
+  font-size: 20px;
+  margin: 5px 0;
+  font-weight: 300;
+}
+.player-input .input-light {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.player-input input {
+  padding: 8px;
+  font-size: 16px;
+  flex: 2;
+  border-radius: 3px;
+  border: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.player-input button {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.player {
+  flex: 1;
+  margin: 0 20px;
+  padding: 10px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
 }
