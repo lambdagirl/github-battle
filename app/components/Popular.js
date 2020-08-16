@@ -5,7 +5,7 @@ import { FaUser, FaStar, FaCodeBranch, FaExclamationTriangle  } from 'react-icon
 
 function RepoGrid({repos}){
   return (
-    <ul>
+    <ul className="grid">
       { repos.map((repo,index)=>{
         const {
           name,
@@ -18,11 +18,15 @@ function RepoGrid({repos}){
         const { login, avatar_url } = owner;
 
         return (
-          <li key={html_url}>
-            <h4>#{index}</h4>
-            <img src={avatar_url} alt={`avatar for ${login}`} />
-            <h2>
-              <a href={html_url}>{name}</a>
+          <li key={html_url} className="repo bg-light">
+            <h4 className="header-lg center-text">#{index}</h4>
+            <img
+              src={avatar_url}
+              className="avatar"
+              alt={`avatar for ${login}`}
+            />
+            <h2 className="center-text">
+              <a className= "link" href={html_url}>{name}</a>
             </h2>
             <ul className="card-list">
               <li>
