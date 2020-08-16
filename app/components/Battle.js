@@ -57,23 +57,29 @@ function PlayerInput({onSubmit, label}){
 
 function PlayerPreview({username, onReset, label}){
     return (
-        <div className='column player'>
-            <h3 className='player-label'>{label}</h3>
-            <div className='row'>
-                <img 
-                    className='avatar-small'
-                    src={`https://github.com/${username}.png?size=200`}
-                    alt={`Avatar for ${username}`}
-                />
-                <a href={`http://github.com/${username}`}
-                    className='link'
-                > {username} </a>
-            </div>
-            <button onClick={onReset}>
-                <FaTimesCircle size={26} />
-            </button>
+      <div className="column player">
+        <h3 className="player-label">{label}</h3>
+        <div className="row">
+          <div className="player-info">
+            <img
+              className="avatar-small"
+              src={`https://github.com/${username}.png?size=200`}
+              alt={`Avatar for ${username}`}
+            />
+            <a href={`http://github.com/${username}`} className="link">
+              {" "}
+              {username}{" "}
+            </a>
+          </div>
+          <button
+            onClick={onReset}
+            className="btn-clear flex-center .btn-space"
+          >
+            <FaTimesCircle color="rgb(194, 57, 42)" size={26} />
+          </button>
         </div>
-    )
+      </div>
+    );
 }
 export default function Battle(){
     const [playerOne,setPlayerOne] = useState(null)
@@ -90,7 +96,7 @@ return (
     <Instructions />
     <div className="players-container">
       <h1 className="center-text header-lg"> Players</h1>
-      <div className="row">
+      <div className="row space-around">
         {playerOne === null ? (
           <PlayerInput
             label="Player One"
