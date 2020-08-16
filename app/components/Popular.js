@@ -48,11 +48,19 @@ export default function Popular(){
   const [selectedLanguage,setSelectedLanguage] = React.useState("All")
   const [state,dispatch] = React.useReducer(popularReducer, {error: null})
 
-  React.useEffect(()=>{
-    fetchPopularRepos(selectedLanguage)
-      .then((repos)=> dispatch({type: 'success', selectedLanguage, repos}))
-      .catch((error)=> dispatch({type: 'error',error}))
-  },[selectedLanguage])
+  const fetchedLanguages = React.useRef([])
+
+  React.useEffect(() => {
+    if (fetchedLanguages.current.includes(selectedLanguage) === false) {
+      fetchedLanguages.current.push(selectedLanguage);
+
+      fetchPopularRepos(selectedLanguage)
+        .then((repos) => dispatch({ type: "success", selectedLanguage, repos }))
+        .catch((error) => dispatch({ type: "error", error }));
+    }
+  }, [selectedLanguage, selectedLanguage]);
+
+    
 
   const isLoading = () => !state[selectedLanguage] && state.error === null
 
