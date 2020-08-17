@@ -18,7 +18,7 @@ function RepoGrid({repos}){
         const { login, avatar_url } = owner;
 
         return (
-          <li key={html_url} className="repo bg-light">
+          <li key={html_url} className="card bg-light">
             <h4 className="header-lg center-text">#{index}</h4>
             <img
               src={avatar_url}
@@ -123,7 +123,7 @@ export default function Popular(){
         onUpdateLanguage={setSelectedLanguage}
       />
       {isLoading() && <p>Loading...</p>}
-      {state.error && <p>{state.error}</p>}
+      {state.error && <p className="center-text error">{state.error}</p>}
       {state[selectedLanguage] && <RepoGrid repos={state[selectedLanguage]} />}
     </React.Fragment>
   );

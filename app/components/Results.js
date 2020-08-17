@@ -1,6 +1,6 @@
 import React from "react";
 import { battle } from "../utils/api";
-
+import {FaCompass, FaBrefcase, FaUsers, FaUser,FaUserFriends,FaCode} from 'react-icons/fa';
 function BattleReducer(state,action){
     if (action.type === 'success'){
         return ({
@@ -42,13 +42,42 @@ export default function Result(location) {
 
     if (error) {
         return (
-            <p>{error}</p>
+            <p className='center-text error'>{error}</p>
         )
     }
   return (
-    <div>
-      Results
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+    <div className="grid space-aroung container-sm">
+      <div className="card bg-light">
+        <h4 className="header-lg center-text">
+          {winner.score === loser.score ? "Tie" : "Winner"}
+        </h4>
+        <img
+          className="avatar"
+          src={winner.profile.avatar_url}
+          alt={`avata for ${winner.profile.login}`}
+        />
+        <h2>
+          <a className="link" href={winner.profile.html_url}>
+            {winner.profile.login}
+          </a>
+        </h2>
+        
+      </div>
+      <div className="card bg-light">
+        <h4 className="header-lg center-text">
+          {winner.score === loser.score ? "Tie" : "Loser"}
+        </h4>
+        <img
+          className="avatar"
+          src={loser.profile.avatar_url}
+          alt={`avata for ${loser.profile.login}`}
+        />
+        <h2>
+          <a className="link" href={loser.profile.html_url}>
+            {loser.profile.login}
+          </a>
+        </h2>
+      </div>
     </div>
   );
 }
