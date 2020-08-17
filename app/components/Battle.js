@@ -27,9 +27,8 @@ function Instructions(){
 function PlayerInput({onSubmit, label}){
     const [username, setUsername] = React.useState('')
     const handleSubmit = (e) => {
-    e.preventDefault();
-
-    onSubmit(username);
+        e.preventDefault();
+        onSubmit(username);
     };
 
   const handleChange = (event) => setUsername(event.target.value)
@@ -80,6 +79,7 @@ function PlayerPreview({username, onReset, label}){
       </div>
     );
 }
+
 export default function Battle(){
     const [playerOne,setPlayerOne] = useState(null)
     const [playerTwo, setPlayerTwo] = useState(null)
@@ -89,12 +89,9 @@ export default function Battle(){
         return <Results playerOne = {playerOne} playerTwo = {playerTwo} />
     }
 
-
-
     const handleSubmit = (id, player) => id === 'playerOne'
     ? setPlayerOne(player)
     : setPlayerTwo(player)
-
   
      const handleReset = (id) =>
        id === "playerOne" ? setPlayerOne(null) : setPlayerTwo(null);
