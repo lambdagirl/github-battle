@@ -80,60 +80,60 @@ function PlayerPreview({username, onReset, label}){
     );
 }
 
-export default function Battle(){
-    const [playerOne,setPlayerOne] = useState(null)
-    const [playerTwo, setPlayerTwo] = useState(null)
-    const [battle, setBattle] = useState(false)
+export default function Battle() {
+  const [playerOne, setPlayerOne] = useState(null);
+  const [playerTwo, setPlayerTwo] = useState(null);
+  const [battle, setBattle] = useState(false);
 
-    if (battle === true){
-        return <Results playerOne = {playerOne} playerTwo = {playerTwo} />
-    }
+  if (battle === true) {
+    return <Results playerOne={playerOne} playerTwo={playerTwo} />;
+  }
 
-    const handleSubmit = (id, player) => id === 'playerOne'
-    ? setPlayerOne(player)
-    : setPlayerTwo(player)
-  
-     const handleReset = (id) =>
-       id === "playerOne" ? setPlayerOne(null) : setPlayerTwo(null);
-return (
-  <>
-    <Instructions />
-    <div className="players-container">
-      <h1 className="center-text header-lg"> Players</h1>
-      <div className="row space-around">
-        {playerOne === null ? (
-          <PlayerInput
-            label="Player One"
-            onSubmit={(player) => handleSubmit("playerOne", player)}
-          />
-        ) : (
-          <PlayerPreview
-            username={playerOne}
-            label="Player One"
-            onReset={() => handleReset("playerOne")}
-          />
-        )}
-        {playerTwo === null ? (
-          <PlayerInput
-            label="Player Two"
-            onSubmit={(player) => handleSubmit("playerTwo", player)}
-          />
-        ) : (
-          <PlayerPreview
-            username={playerTwo}
-            label="Player Two"
-            onReset={() => handleReset("playerTwo")}
-          />
+  const handleSubmit = (id, player) =>
+    id === "playerOne" ? setPlayerOne(player) : setPlayerTwo(player);
+
+  const handleReset = (id) =>
+    id === "playerOne" ? setPlayerOne(null) : setPlayerTwo(null);
+  return (
+    <>
+      <Instructions />
+      <div className="players-container">
+        <h1 className="center-text header-lg"> Players</h1>
+        <div className="row space-around">
+          {playerOne === null ? (
+            <PlayerInput
+              label="Player One"
+              onSubmit={(player) => handleSubmit("playerOne", player)}
+            />
+          ) : (
+            <PlayerPreview
+              username={playerOne}
+              label="Player One"
+              onReset={() => handleReset("playerOne")}
+            />
+          )}
+          {playerTwo === null ? (
+            <PlayerInput
+              label="Player Two"
+              onSubmit={(player) => handleSubmit("playerTwo", player)}
+            />
+          ) : (
+            <PlayerPreview
+              username={playerTwo}
+              label="Player Two"
+              onReset={() => handleReset("playerTwo")}
+            />
+          )}
+        </div>
+        {playerOne && playerTwo && (
+          <button
+            className="btn dark-btn btn-space"
+            onClick={() => setBattle(true)}
+          >
+            Battle
+          </button>
         )}
       </div>
-      {playerOne && playerTwo &&(
-          <button className='btn dark-btn btn-space'
-            onClick={()=>setBattle(true)}
-            >
-            Battle
-          </button>)
-      }
-    </div>
-  </>
-);
+    </>
+  );
 }
