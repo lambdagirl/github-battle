@@ -9,6 +9,7 @@ import {
   FaCode,
 } from "react-icons/fa";
 
+import Card from './Card';
 function ProfileList({profile}){
     return (
     <ul className="card-list">
