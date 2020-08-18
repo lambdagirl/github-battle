@@ -1,6 +1,44 @@
 import React from "react";
 import { battle } from "../utils/api";
-import {FaCompass, FaBrefcase, FaUsers, FaUser,FaUserFriends,FaCode} from 'react-icons/fa';
+import {
+  FaCompass,
+  FaBriefcase,
+  FaUsers,
+  FaUser,
+  FaUserFriends,
+  FaCode,
+} from "react-icons/fa";
+
+function ProfileList({profile}){
+    return (
+    <ul className="card-list">
+      <li>
+        <FaUser color="rgb(239, 115, 115)" size={22} />
+        {profile.name}
+      </li>
+      {profile.location && (
+        <li>
+          <FaCompass color="rgb(144, 115, 255)" size={22} />
+          {profile.location}
+        </li>
+      )}
+      {profile.company && (
+        <li>
+          <FaBriefcase color="#795548" size={22} />
+          {profile.company}
+        </li>
+      )}
+      <li>
+        <FaUsers color="rgb(129, 195, 245)" size={22} />
+        {profile.followers.toLocaleString()} followers
+      </li>
+      <li>
+        <FaUserFriends color="rgb(64, 183, 95)" size={22} />
+        {profile.following.toLocaleString()} following
+      </li>
+    </ul>)
+}
+
 function BattleReducer(state,action){
     if (action.type === 'success'){
         return ({
@@ -57,11 +95,12 @@ export default function Result(location) {
           alt={`avata for ${winner.profile.login}`}
         />
         <h2>
-          <a className="link" href={winner.profile.html_url}>
+          <a className="link center-text" href={winner.profile.html_url}>
             {winner.profile.login}
           </a>
         </h2>
-        
+
+        <ProfileList profile={winner.profile} />
       </div>
       <div className="card bg-light">
         <h4 className="header-lg center-text">
@@ -77,6 +116,7 @@ export default function Result(location) {
             {loser.profile.login}
           </a>
         </h2>
+        <ProfileList profile={loser.profile} />
       </div>
     </div>
   );
