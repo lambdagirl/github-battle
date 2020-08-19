@@ -10,6 +10,9 @@ import {
 
 import Card from './Card';
 import {Link} from "react-router-dom";
+
+import Loading from './Loading';
+
 function ProfileList({profile}){
     return (
     <ul className="card-list">
@@ -76,7 +79,7 @@ export default function Result(location) {
     const {winner,loser,error,loading} = state
 
     if (loading === true){
-        return <p>Loading</p>
+        return <Loading />;
     }
 
     if (error) {
