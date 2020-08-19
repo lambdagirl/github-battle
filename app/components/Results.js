@@ -6,11 +6,10 @@ import {
   FaUsers,
   FaUser,
   FaUserFriends,
-  FaCode,
 } from "react-icons/fa";
 
 import Card from './Card';
-
+import {Link} from "react-router-dom";
 function ProfileList({profile}){
     return (
     <ul className="card-list">
@@ -85,26 +84,33 @@ export default function Result(location) {
             <p className='center-text error'>{error}</p>
         )
     }
+
+    
   return (
-    <div className="grid space-aroung container-sm">
-      <Card
-        header={winner.score === loser.score ? "Tie" : "Winner"}
-        subheader={`score: ` + winner.score}
-        avatar={winner.profile.avatar_url}
-        href={winner.profile.html_url}
-        name={winner.profile.login}
-      >
-        <ProfileList profile={winner.profile} />
-      </Card>
-      <Card
-        header={winner.score === loser.score ? "Tie" : "Winner"}
-        subheader={`score: ` + loser.score}
-        avatar={loser.profile.avatar_url}
-        href={loser.profile.html_url}
-        name={loser.profile.login}
-      >
-        <ProfileList profile={loser.profile} />
-      </Card>
-    </div>
+    <>
+      <div className="grid space-aroung container-sm">
+        <Card
+          header={winner.score === loser.score ? "Tie" : "Winner"}
+          subheader={`score: ` + winner.score}
+          avatar={winner.profile.avatar_url}
+          href={winner.profile.html_url}
+          name={winner.profile.login}
+        >
+          <ProfileList profile={winner.profile} />
+        </Card>
+        <Card
+          header={winner.score === loser.score ? "Tie" : "Winner"}
+          subheader={`score: ` + loser.score}
+          avatar={loser.profile.avatar_url}
+          href={loser.profile.html_url}
+          name={loser.profile.login}
+        >
+          <ProfileList profile={loser.profile} />
+        </Card>
+      </div>
+      <Link to='/' className="btn dark-btn btn-space">
+        Reset
+      </Link>
+    </>
   );
 }
