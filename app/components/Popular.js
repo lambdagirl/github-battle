@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { fetchPopularRepos } from "../utils/api";
 import { FaUser, FaStar, FaCodeBranch, FaExclamationTriangle  } from 'react-icons/fa';
+import Loading from "./Loading";
 
 function RepoGrid({repos}){
   return (
@@ -122,7 +123,7 @@ export default function Popular(){
         selected={selectedLanguage}
         onUpdateLanguage={setSelectedLanguage}
       />
-      {isLoading() && <p>Loading...</p>}
+      {isLoading() && <Loading text='fetching' />}
       {state.error && <p className="center-text error">{state.error}</p>}
       {state[selectedLanguage] && <RepoGrid repos={state[selectedLanguage]} />}
     </React.Fragment>

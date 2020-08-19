@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle } from "react-icons/fa";
 import Results from './Results';
-
 function Instructions(){
     return (
       <div className="instructions-container">
