@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 
 import Card from './Card';
+
 function ProfileList({profile}){
     return (
     <ul className="card-list">
@@ -86,39 +87,24 @@ export default function Result(location) {
     }
   return (
     <div className="grid space-aroung container-sm">
-      <div className="card bg-light">
-        <h4 className="header-lg center-text">
-          {winner.score === loser.score ? "Tie" : "Winner"}
-        </h4>
-        <img
-          className="avatar"
-          src={winner.profile.avatar_url}
-          alt={`avata for ${winner.profile.login}`}
-        />
-        <h2>
-          <a className="link center-text" href={winner.profile.html_url}>
-            {winner.profile.login}
-          </a>
-        </h2>
-
+      <Card
+        header={winner.score === loser.score ? "Tie" : "Winner"}
+        subheader={`score: ` + winner.score}
+        avatar={winner.profile.avatar_url}
+        href={winner.profile.html_url}
+        name={winner.profile.login}
+      >
         <ProfileList profile={winner.profile} />
-      </div>
-      <div className="card bg-light">
-        <h4 className="header-lg center-text">
-          {winner.score === loser.score ? "Tie" : "Loser"}
-        </h4>
-        <img
-          className="avatar"
-          src={loser.profile.avatar_url}
-          alt={`avata for ${loser.profile.login}`}
-        />
-        <h2>
-          <a className="link" href={loser.profile.html_url}>
-            {loser.profile.login}
-          </a>
-        </h2>
+      </Card>
+      <Card
+        header={winner.score === loser.score ? "Tie" : "Winner"}
+        subheader={`score: ` + loser.score}
+        avatar={loser.profile.avatar_url}
+        href={loser.profile.html_url}
+        name={loser.profile.login}
+      >
         <ProfileList profile={loser.profile} />
-      </div>
+      </Card>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
 
-function Card({ header,subheader, avatar,href, name, children}) {
+export default function Card({ header,subheader, avatar,href, name, children}) {
   return (
-    <div>
+    <div className="card bg-light">
       <h4 className="header-lg center-text">{header}</h4>
       <img src={avatar} className="avatar" alt={`avatar for ${name}`} />
       {subheader && <h4 className="center-text">{subheader}</h4>}
