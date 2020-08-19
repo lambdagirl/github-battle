@@ -111,7 +111,7 @@ export default function Result(location) {
           <ProfileList profile={loser.profile} />
         </Card>
       </div>
-      <Link to="/" className="btn btn-dark btn-space ">
+      <Link to="/" className="btn btn-dark btn-space">
         Reset
       </Link>
     </>

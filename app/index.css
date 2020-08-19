@@ -46,7 +46,9 @@ li {
       color: #e6e6e6;
   background: #141414;
 }
-
+.btn-space {
+  margin:40px auto;
+}
 
 .btn-dark:disabled {
   background: #f2f2f2;
@@ -123,9 +125,7 @@ li {
 }
 
 
-.container{
-    margin: 100px 0 ;
-}
+
 
 .container-sm{
     width:80%;
@@ -204,9 +204,7 @@ li {
   margin-left: 10px;
 }
 
-.btn-space {
-  margin:40px auto;
-}
+
 
 .avatar-small {
   width: 60px;

@@ -12,7 +12,7 @@ function App(){
       <Router>
         <div className="container">
           <Switch>
-            <Route exact path="/" component={Popular} />
+            <Route exact path="/" component={Battle} />
             <Route exact path="/battle" component={Battle} />
             <Route path="/battle/results" component={Results} />
             <Route render={() => <h1>404</h1>} />
