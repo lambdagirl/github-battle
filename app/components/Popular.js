@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Card from "./Card";
+import Loading from "./Loading";
 import { fetchPopularRepos } from "../utils/api";
 import {
   FaUser,
@@ -7,12 +9,9 @@ import {
   FaCodeBranch,
   FaExclamationTriangle,
 } from "react-icons/fa";
-import Card from "./Card";
-import Loading from "./Loading";
 
 function LanguagesNav({ selected, onUpdateLanguage }) {
   const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python","Go"];
-
   return (
     <ul className="flex-center">
       {languages.map((language) => (
@@ -107,7 +106,6 @@ function popularReducer(state, action) {
 export default function Popular() {
   const [selectedLanguage, setSelectedLanguage] = React.useState("All");
   const [state, dispatch] = React.useReducer(popularReducer, { error: null });
-
   const fetchedLanguages = React.useRef([]);
 
   React.useEffect(() => {
@@ -127,11 +125,8 @@ export default function Popular() {
         selected={selectedLanguage}
         onUpdateLanguage={setSelectedLanguage}
       />
-
       {isLoading() && <Loading text="Fetching Repos" />}
-
       {state.error && <p className="center-text error">{state.error}</p>}
-
       {state[selectedLanguage] && <ReposGrid repos={state[selectedLanguage]} />}
     </React.Fragment>
   );

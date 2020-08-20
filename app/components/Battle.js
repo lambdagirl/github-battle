@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FaUserFriends,
   FaFighterJet,
   FaTrophy,
   FaTimesCircle,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+
 function Instructions() {
   return (
     <div className="instructions-container">
@@ -25,7 +26,7 @@ function Instructions() {
         </li>
       </ol>
     </div>
-  );
+  )
 }
 
 function PlayerInput({ onSubmit, label }) {
@@ -34,7 +35,6 @@ function PlayerInput({ onSubmit, label }) {
     e.preventDefault();
     onSubmit(username);
   };
-
   const handleChange = (event) => setUsername(event.target.value);
   return (
     <form onSubmit={handleSubmit} className="column player">

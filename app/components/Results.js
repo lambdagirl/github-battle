@@ -7,12 +7,11 @@ import {
   FaUser,
   FaUserFriends,
 } from "react-icons/fa";
-
 import Card from "./Card";
 import { Link } from "react-router-dom";
-
 import Loading from "./Loading";
 import queryString from "query-string";
+
 function ProfileList({ profile }) {
   return (
     <ul className="card-list">
@@ -41,7 +40,7 @@ function ProfileList({ profile }) {
         {profile.following.toLocaleString()} following
       </li>
     </ul>
-  );
+  )
 }
 
 function BattleReducer(state, action) {
@@ -64,57 +63,54 @@ function BattleReducer(state, action) {
 }
 
 export default function Result({location}) {
-    
-const { playerOne, playerTwo } = queryString.parse(location.search);
-  const [state, dispatch] = React.useReducer(BattleReducer, {
-    winner: null,
-    loser: null,
-    error: null,
-    loading: true,
-  });
-  React.useEffect(() => {
-    battle([playerOne, playerTwo])
-      .then((players) =>
-        dispatch({ type: "success", winner: players[0], loser: players[1] })
-      )
-      .catch(({ message }) => dispatch({ type: "error", message }));
-  }, [playerOne, playerTwo]);
+    const { playerOne, playerTwo } = queryString.parse(location.search);
+    const [state, dispatch] = React.useReducer(BattleReducer, {
+        winner: null,
+        loser: null,
+        error: null,
+        loading: true,
+    });
+    React.useEffect(() => {
+        battle([playerOne, playerTwo])
+        .then((players) =>
+            dispatch({ type: "success", winner: players[0], loser: players[1] })
+        )
+        .catch(({ message }) => dispatch({ type: "error", message }));
+    }, [playerOne, playerTwo]);
 
-  const { winner, loser, error, loading } = state;
+    const { winner, loser, error, loading } = state;
 
-  if (loading === true) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <p className="center-text error">{error}</p>;
-  }
-
-  return (
-    <>
-      <div className="grid space-aroung container-sm">
-        <Card
-          header={winner.score === loser.score ? "Tie" : "Winner"}
-          subheader={`score: ` + winner.score}
-          avatar={winner.profile.avatar_url}
-          href={winner.profile.html_url}
-          name={winner.profile.login}
-        >
-          <ProfileList profile={winner.profile} />
-        </Card>
-        <Card
-          header={winner.score === loser.score ? "Tie" : "Winner"}
-          subheader={`score: ` + loser.score}
-          avatar={loser.profile.avatar_url}
-          href={loser.profile.html_url}
-          name={loser.profile.login}
-        >
-          <ProfileList profile={loser.profile} />
-        </Card>
-      </div>
-      <Link to="/" className="btn btn-dark btn-space">
-        Reset
-      </Link>
-    </>
-  );
+    if (loading === true) {
+        return <Loading />;
+    }
+    if (error) {
+        return <p className="center-text error">{error}</p>;
+    }
+    return (
+        <>
+        <div className="grid space-aroung container-sm">
+            <Card
+            header={winner.score === loser.score ? "Tie" : "Winner"}
+            subheader={`score: ` + winner.score}
+            avatar={winner.profile.avatar_url}
+            href={winner.profile.html_url}
+            name={winner.profile.login}
+            >
+            <ProfileList profile={winner.profile} />
+            </Card>
+            <Card
+            header={winner.score === loser.score ? "Tie" : "Winner"}
+            subheader={`score: ` + loser.score}
+            avatar={loser.profile.avatar_url}
+            href={loser.profile.html_url}
+            name={loser.profile.login}
+            >
+            <ProfileList profile={loser.profile} />
+            </Card>
+        </div>
+        <Link to="/" className="btn btn-dark btn-space">
+            Reset
+        </Link>
+        </>
+    )
 }
