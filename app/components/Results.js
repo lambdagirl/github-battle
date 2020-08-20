@@ -8,13 +8,13 @@ import {
   FaUserFriends,
 } from "react-icons/fa";
 
-import Card from './Card';
-import {Link} from "react-router-dom";
+import Card from "./Card";
+import { Link } from "react-router-dom";
 
-import Loading from './Loading';
-
-function ProfileList({profile}){
-    return (
+import Loading from "./Loading";
+import queryString from "query-string";
+function ProfileList({ profile }) {
+  return (
     <ul className="card-list">
       <li>
         <FaUser color="rgb(239, 115, 115)" size={22} />
@@ -40,56 +40,56 @@ function ProfileList({profile}){
         <FaUserFriends color="rgb(64, 183, 95)" size={22} />
         {profile.following.toLocaleString()} following
       </li>
-    </ul>)
+    </ul>
+  );
 }
 
-function BattleReducer(state,action){
-    if (action.type === 'success'){
-        return ({
-            winner: action.winner ,
-            loser: action.loser,
-            error: null,
-            loading: false
-        })
-    } else if (action.type === 'error'){
-        return {
-            ...state,
-            error: action.message,
-            loading: false
-        } 
-    } else {
-        throw new Error(`That action type isn't supported`)
-    }
+function BattleReducer(state, action) {
+  if (action.type === "success") {
+    return {
+      winner: action.winner,
+      loser: action.loser,
+      error: null,
+      loading: false,
+    };
+  } else if (action.type === "error") {
+    return {
+      ...state,
+      error: action.message,
+      loading: false,
+    };
+  } else {
+    throw new Error(`That action type isn't supported`);
+  }
 }
 
-export default function Result(location) {
+export default function Result({location}) {
     
-    const { playerOne, playerTwo } = location
-    const [state, dispatch] = React.useReducer(BattleReducer, {
-        winner: null,
-        loser: null,
-        error: null,
-        loading: true
-    })
-    React.useEffect(()=>{
-        battle([playerOne, playerTwo])
-        .then((players) => dispatch({type:'success', winner: players[0], loser: players[1]}))
-        .catch(({message}) => dispatch({type:'error', message}))
-    },[playerOne, playerTwo])
+const { playerOne, playerTwo } = queryString.parse(location.search);
+  const [state, dispatch] = React.useReducer(BattleReducer, {
+    winner: null,
+    loser: null,
+    error: null,
+    loading: true,
+  });
+  React.useEffect(() => {
+    battle([playerOne, playerTwo])
+      .then((players) =>
+        dispatch({ type: "success", winner: players[0], loser: players[1] })
+      )
+      .catch(({ message }) => dispatch({ type: "error", message }));
+  }, [playerOne, playerTwo]);
 
-    const {winner,loser,error,loading} = state
+  const { winner, loser, error, loading } = state;
 
-    if (loading === true){
-        return <Loading />;
-    }
+  if (loading === true) {
+    return <Loading />;
+  }
 
-    if (error) {
-        return (
-            <p className='center-text error'>{error}</p>
-        )
-    }
+  if (error) {
+    return <p className="center-text error">{error}</p>;
+  }
 
-    
   return (
     <>
       <div className="grid space-aroung container-sm">

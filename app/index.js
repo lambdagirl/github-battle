@@ -25,9 +25,8 @@ function App(){
             <Route exact path="/battle">
               <Battle />
             </Route>
-            <Route path="/battle/results">
-              <Results />
-            </Route>
+            <Route path='/battle/results' component={Results} />
+              
             <Route path="*" 
               component = {() => { return <h3>404 - Not found</h3>}} 
             />
