@@ -11,13 +11,15 @@ import Card from "./Card";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import queryString from "query-string";
-
+import Tooltip from './Tooltip'
 function ProfileList({ profile }) {
   return (
     <ul className="card-list">
       <li>
-        <FaUser color="rgb(239, 115, 115)" size={22} />
-        {profile.name}
+        <Tooltip text="github username">
+          <FaUser color="rgb(239, 115, 115)" size={22} />
+          {profile.name}
+        </Tooltip>
       </li>
       {profile.location && (
         <li>
@@ -40,7 +42,7 @@ function ProfileList({ profile }) {
         {profile.following.toLocaleString()} following
       </li>
     </ul>
-  )
+  );
 }
 
 function BattleReducer(state, action) {

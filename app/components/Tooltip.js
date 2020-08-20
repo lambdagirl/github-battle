@@ -1,5 +1,5 @@
 import React from 'react'
-import useHover from './hooks/useHover'
+import useHover from '../hooks/useHover'
 const styles = {
   container: {
     position: 'relative',
