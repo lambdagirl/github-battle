@@ -5,17 +5,30 @@ import Popular from './components/Popular';
 import Battle from "./components/Battle";
 import Results from "./components/Results";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App(){
     return (
       <Router>
         <div className="container">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/battle">battle</Link>
+            </li>
+          </ul>
           <Switch>
-            <Route exact path="/" component={Battle} />
-            <Route exact path="/battle" component={Battle} />
-            <Route path="/battle/results" component={Results} />
-            <Route render={() => <h1>404</h1>} />
+            <Route path="/battle">
+              <Battle />
+            </Route>
+            <Route path="/">
+              <Popular />
+            </Route>
+            <Route path="/battle/results">
+              <Results />
+            </Route>
           </Switch>
         </div>
       </Router>
