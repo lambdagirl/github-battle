@@ -5,7 +5,7 @@ import Popular from './components/Popular';
 import Battle from "./components/Battle";
 import Results from "./components/Results";
 import Nav from './components/Nav';
-
+import {ThemeProvider} from './context/theme'
 import {
   BrowserRouter as Router,
   Switch,
