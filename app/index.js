@@ -14,26 +14,36 @@ import {
 
 
 function App(){
-    return (
-      <Router>
-        <div className="container">
-          <Nav />
-          <Switch>
-            <Route exact path="/">
-              <Popular />
-            </Route>
-            <Route exact path="/battle">
-              <Battle />
-            </Route>
-            <Route path='/battle/results' component={Results} />
-              
-            <Route path="*" 
-              component = {() => { return <h3>404 - Not found</h3>}} 
-            />
-          </Switch>
+  const [theme,setTheme] = React.useState('light')
+  const toggleTheme = () =>
+    setTheme((theme) => (theme === "light" ? "dark" : "light"));
+  return (
+    <Router>
+      <ThemeProvider value={theme}>
+        <div className={theme}>
+          <div className="container">
+            <Nav toggleTheme = {toggleTheme}/>
+            <Switch>
+              <Route exact path="/">
+                <Popular />
+              </Route>
+              <Route exact path="/battle">
+                <Battle />
+              </Route>
+              <Route path="/battle/results" component={Results} />
+
+              <Route
+                path="*"
+                component={() => {
+                  return <h3>404 - Not found</h3>;
+                }}
+              />
+            </Switch>
+          </div>
         </div>
-      </Router>
-    );
+      </ThemeProvider>
+    </Router>
+  );
 }
 
 ReactDOM.render(
