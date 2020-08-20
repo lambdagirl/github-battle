@@ -122,14 +122,15 @@ export default function Battle() {
           )}
         </div>
         {playerOne && playerTwo && (
-          <Link className="btn dark-btn btn-space"
-
+          <Link
+            className="btn dark-btn btn-space"
             to={{
-
               pathname: "/battle/results",
-              search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`
+              search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`,
             }}
-          >Battle</Link>
+          >
+            Battle
+          </Link>
         )}
       </div>
     </>

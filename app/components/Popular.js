@@ -11,7 +11,7 @@ import Card from "./Card";
 import Loading from "./Loading";
 
 function LanguagesNav({ selected, onUpdateLanguage }) {
-  const languages = ["All", "JavaScript", "Ruby", "Java", "Python","Go"];
+  const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python","Go"];
 
   return (
     <ul className="flex-center">
@@ -119,7 +119,6 @@ export default function Popular() {
         .catch((error) => dispatch({ type: "error", error }));
     }
   }, [fetchedLanguages, selectedLanguage]);
-
   const isLoading = () => !state[selectedLanguage] && state.error === null;
 
   return (

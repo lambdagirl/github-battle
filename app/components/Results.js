@@ -64,7 +64,7 @@ function BattleReducer(state,action){
 
 export default function Result(location) {
     
-    const { playerOne, playerTwo } = queryString.parse(location.search)
+    const { playerOne, playerTwo } = queryString.parse(location.search);
     const [state, dispatch] = React.useReducer(BattleReducer, {
         winner: null,
         loser: null,

@@ -19,9 +19,7 @@ function App(){
             <Route path="/">
               <Popular />
             </Route>
-            <Route path="/battle/results">
-              <Results />
-            </Route>
+            <Route path="/battle/results" component={Results} />
           </Switch>
         </div>
       </Router>
