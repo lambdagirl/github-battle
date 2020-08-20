@@ -12,7 +12,7 @@ import Card from './Card';
 import {Link} from "react-router-dom";
 
 import Loading from './Loading';
-
+import queryString from 'query-string'
 function ProfileList({profile}){
     return (
     <ul className="card-list">
@@ -63,7 +63,8 @@ function BattleReducer(state,action){
 }
 
 export default function Result(location) {
-    const { playerOne, playerTwo } = location
+    
+    const { playerOne, playerTwo } = queryString.parse(location.search)
     const [state, dispatch] = React.useReducer(BattleReducer, {
         winner: null,
         loser: null,
