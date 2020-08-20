@@ -6,22 +6,31 @@ import Battle from "./components/Battle";
 import Results from "./components/Results";
 import Nav from './components/Nav';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+
 function App(){
     return (
       <Router>
         <div className="container">
           <Nav />
           <Switch>
-            <Route path="/battle">
-              <Battle />
-            </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Popular />
+            </Route>
+            <Route exact path="/battle">
+              <Battle />
             </Route>
             <Route path="/battle/results">
               <Results />
             </Route>
+            <Route path="*" 
+              component = {() => { return <h3>404 - Not found</h3>}} 
+            />
           </Switch>
         </div>
       </Router>
