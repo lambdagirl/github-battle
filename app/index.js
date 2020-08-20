@@ -19,7 +19,9 @@ function App(){
             <Route path="/">
               <Popular />
             </Route>
-            <Route path="/battle/results" component={Results} />
+            <Route path="/battle/results">
+              <Results />
+            </Route>
           </Switch>
         </div>
       </Router>

@@ -83,7 +83,11 @@ function PlayerPreview({username, onReset, label}){
 export default function Battle() {
   const [playerOne, setPlayerOne] = useState(null);
   const [playerTwo, setPlayerTwo] = useState(null);
+  const [battle, setBattle] = useState(false);
 
+  if (battle === true) {
+    return <Results playerOne={playerOne} playerTwo={playerTwo} />;
+  }
 
   const handleSubmit = (id, player) =>
     id === "playerOne" ? setPlayerOne(player) : setPlayerTwo(player);
@@ -122,15 +126,13 @@ export default function Battle() {
           )}
         </div>
         {playerOne && playerTwo && (
-          <Link
+          
+          <button
             className="btn dark-btn btn-space"
-            to={{
-              pathname: "/battle/results",
-              search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`,
-            }}
+            onClick={() => setBattle(true)}
           >
             Battle
-          </Link>
+          </button>
         )}
       </div>
     </>
